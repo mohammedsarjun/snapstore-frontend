@@ -1,0 +1,11 @@
+  .li-bg { min-height:100vh; display:grid; grid-template-columns:1fr 1fr; }
+  @media(max-width:768px){ .li-bg { grid-template-columns:1fr; } }
+  .li-panel { display:flex; flex-direction:column; justify-content:center; align-items:center; padding:3rem 2rem; overflow-y:auto; }
+  .li-card { background:var(--card); border-radius:8px; padding:2.5rem 2.5rem 2rem; width:100%; max-width:440px; box-shadow:var(--shadow); border:1px solid var(--warm); }
+  .li-title { font-family:var(--display); font-size:1.85rem; font-weight:700; margin-bottom:.3rem; letter-spacing:-.5px; }
+  .li-sub { font-size:.9rem; color:var(--muted); margin-bottom:1.8rem; font-weight:300; }
+  .li-forgot { background:none; border:none; cursor:pointer; color:var(--accent2); font-family:var(--body); font-size:.82rem; text-decoration:underline; display:block; text-align:right; margin-bottom:.5rem; }
+  .li-btn { width:100%; padding:.85rem; background:var(--ink); color:var(--cream); border:none; border-radius:var(--radius); font-family:var(--body); font-size:.95rem; font-weight:500; cursor:pointer; margin-top:.5rem; transition:background .2s; }
+  .li-btn:hover { background:#2a2826; }
+  .li-link { text-align:center; margin-top:1.2rem; font-size:.88rem; color:var(--muted); }
+  .li-link button { background:none; border:none; cursor:pointer; color:var(--accent2); font-weight:500; font-size:.88rem; font-family:var(--body); text-decoration:underline; }
