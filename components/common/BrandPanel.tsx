@@ -8,7 +8,7 @@ export default function BrandPanel() {
         <>
 
             <div className={styles["brand-panel"]}>
-                <div className={styles["brand-logo"]}>Frame<span>.</span></div>
+                <div className={styles["brand-logo"]}>SnapStore<span>.</span></div>
                 <div className={styles["brand-tag"]}>
                     Your personal gallery — collect, curate, and arrange images exactly the way you want them.
                 </div>
