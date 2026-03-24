@@ -36,7 +36,7 @@ export const Login: FC<LoginProps> = ({ onLogin }): ReactElement => {
         else console.log("Logging in with", form.email);
     };
 
-    const handleNavigate = (page: "login" | "signup" | "forgot" | "gallery"): void => {
+    const handleNavigate = (page: "login" | "signup" | "reset-password" | "gallery"): void => {
         router.push(`/${page}`);
     };
 
@@ -50,7 +50,7 @@ export const Login: FC<LoginProps> = ({ onLogin }): ReactElement => {
                         <div className={styles["li-sub"]}>Sign in to your Frame account</div>
                         <Field<LoginForm> label="Email" name="email" type="email" value={form.email} onChange={handleChange} errors={errors} placeholder="you@example.com" />
                         <Field<LoginForm> label="Password" name="password" type="password" value={form.password} onChange={handleChange} errors={errors} placeholder="Your password" />
-                        <button className={styles["li-forgot"]} onClick={(): void => { handleNavigate("forgot"); }}>
+                        <button className={styles["li-forgot"]} onClick={(): void => { handleNavigate("reset-password"); }}>
                             Forgot password?
                         </button>
                         <button className={styles["li-btn"]} onClick={handleSubmit}>Sign In</button>

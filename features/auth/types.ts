@@ -15,6 +15,11 @@ export interface SignUpForm {
     [key: string]: string;
 }
 
+export interface ForgotForm {
+    email: string;
+    [key: string]: string;
+}
+
 export type ObjOk<T extends Record<string, string>> = { readonly values: T; readonly errors?: never };
 export type ObjFail<T extends Record<string, string>> = { readonly errors: FormErrors<T>; readonly values?: never };
 export type ObjResult<T extends Record<string, string>> = ObjOk<T> | ObjFail<T>;
@@ -30,5 +35,9 @@ export interface LoginProps {
 
 export interface SignUpProps {
     onSignUp?: (data: SignUpForm) => void;
+}
+
+export interface ForgotPasswordProps {
+    onReset?: (email: string) => void;
 }
 

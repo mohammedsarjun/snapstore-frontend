@@ -1,7 +1,7 @@
 
 import { FormErrors } from "@/types/Fields";
 import z from "zod";
-import { LoginForm, ObjResult, ObjSchema, SignUpForm } from "./types";
+import { ForgotForm, LoginForm, ObjResult, ObjSchema, SignUpForm } from "./types";
 
 export const loginSchema: ObjSchema<LoginForm> = {
     parse(data: { readonly [K in keyof LoginForm]?: unknown }): ObjResult<LoginForm> {
@@ -41,6 +41,27 @@ export const signUpSchema: ObjSchema<SignUpForm> = {
             const errors: FormErrors<SignUpForm> = {};
             result.error.issues.forEach((issue) => {
                 const path = issue.path[0] as keyof SignUpForm;
+                if (path) {
+                    errors[path] = issue.message;
+                }
+            });
+            return { errors };
+        }
+    },
+};
+
+export const forgotSchema: ObjSchema<ForgotForm> = {
+    parse(data: { readonly [K in keyof ForgotForm]?: unknown }): ObjResult<ForgotForm> {
+        const result = z.object({
+            email: z.string().min(1, "Email is required").email("Enter a valid email"),
+        }).safeParse(data);
+
+        if (result.success) {
+            return { values: result.data as ForgotForm };
+        } else {
+            const errors: FormErrors<ForgotForm> = {};
+            result.error.issues.forEach((issue) => {
+                const path = issue.path[0] as keyof ForgotForm;
                 if (path) {
                     errors[path] = issue.message;
                 }
