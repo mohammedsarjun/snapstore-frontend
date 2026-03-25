@@ -1,0 +1,19 @@
+.otp-bg { min-height:100vh; display:grid; grid-template-columns:1fr 1fr; }
+@media(max-width:768px){ .otp-bg { grid-template-columns:1fr; } }
+.otp-panel { display:flex; flex-direction:column; justify-content:center; align-items:center; padding:3rem 2rem; overflow-y:auto; }
+.otp-card { background:var(--card); border-radius:8px; padding:2.5rem 2.5rem 2rem; width:100%; max-width:440px; box-shadow:var(--shadow); border:1px solid var(--warm); }
+.otp-title { font-family:var(--display); font-size:1.85rem; font-weight:700; margin-bottom:.3rem; letter-spacing:-.5px; }
+.otp-sub { font-size:.9rem; color:var(--muted); margin-bottom:1.8rem; font-weight:300; }
+.otp-sub strong { color:var(--ink); font-weight:500; }
+.otp-error { background:#fde8e8; border:1px solid #f5c2c2; border-radius:var(--radius); color:#c92a2a; padding:.8rem 1rem; font-size:.88rem; margin-bottom:1rem; }
+.otp-timer { text-align:center; margin-bottom:1rem; font-size:.88rem; color:var(--muted); }
+.otp-timer strong { color:var(--ink); font-weight:600; font-family:var(--body); letter-spacing:1px; }
+.otp-expired { color:var(--accent); font-weight:500; }
+.otp-btn { width:100%; padding:.85rem; background:var(--ink); color:var(--cream); border:none; border-radius:var(--radius); font-family:var(--body); font-size:.95rem; font-weight:500; cursor:pointer; margin-top:.5rem; transition:background .2s; }
+.otp-btn:hover { background:#2a2826; }
+.otp-btn:disabled { opacity:0.6; cursor:not-allowed; }
+.otp-resend { width:100%; padding:.75rem; background:transparent; color:var(--accent2); border:1.5px solid var(--accent2); border-radius:var(--radius); font-family:var(--body); font-size:.9rem; font-weight:500; cursor:pointer; margin-top:.8rem; transition:all .2s; }
+.otp-resend:hover:not(:disabled) { background:var(--accent2); color:var(--cream); }
+.otp-resend-disabled { opacity:0.4; cursor:not-allowed; border-color:var(--warm); color:var(--muted); }
+.otp-link { text-align:center; margin-top:1.2rem; font-size:.88rem; color:var(--muted); }
+.otp-link button { background:none; border:none; cursor:pointer; color:var(--accent2); font-weight:500; font-size:.88rem; font-family:var(--body); text-decoration:underline; }

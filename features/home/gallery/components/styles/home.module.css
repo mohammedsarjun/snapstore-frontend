@@ -1,0 +1,15 @@
+.gpShell { min-height:100vh; display:flex; flex-direction:column; background:var(--cream); }
+.gpMain { padding:2.5rem 2rem; max-width:1100px; margin:0 auto; width:100%; }
+.gpHdr { display:flex; align-items:flex-end; justify-content:space-between; margin-bottom:1.8rem; border-bottom:1.5px solid var(--warm); padding-bottom:1rem; }
+.gpHt { font-family:var(--display); font-size:2rem; font-weight:700; letter-spacing:-.5px; }
+.gpHc { font-size:.84rem; color:var(--muted); }
+.gpHa { display:flex; gap:.7rem; align-items:center; }
+.gpAdd { display:flex; align-items:center; gap:.4rem; background:var(--accent); color:#fff; border:none; border-radius:var(--radius); padding:.6rem 1.2rem; font-size:.88rem; font-weight:500; cursor:pointer; font-family:var(--body); transition:transform .2s,background .2s; }
+.gpAdd:hover { background:#b34425; transform:translateY(-1px); }
+.gpDsel { padding:.4rem .9rem; font-size:.81rem; border-radius:var(--radius); border:1px solid #f5c2b5; background:var(--cream); color:var(--accent); cursor:pointer; font-family:var(--body); font-weight:500; transition:background .15s; }
+.gpDsel:hover { background:#fdf0ec; }
+.gpGrid { display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:1.2rem; }
+.gpEmpty { text-align:center; padding:5rem 2rem; color:var(--muted); }
+.gpEi { font-size:3.5rem; margin-bottom:1rem; }
+.gpEmpty h3 { font-family:var(--display); font-size:1.4rem; color:var(--ink); margin-bottom:.5rem; }
+.loading { text-align: center; padding: 4rem; font-size: 1.2rem; color: var(--muted); }

@@ -1,0 +1,41 @@
+.f-wrap {
+  margin-bottom: 1.1rem;
+}
+
+.f-wrap label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.4rem;
+}
+
+.f-wrap input {
+  width: 100%;
+  padding: 0.7rem 0.95rem;
+  border: 1.5px solid var(--warm);
+  border-radius: var(--radius);
+  font-family: var(--body);
+  font-size: 0.95rem;
+  background: var(--cream);
+  color: var(--ink);
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.f-wrap input:focus {
+  border-color: var(--ink);
+  box-shadow: 0 0 0 3px rgba(15, 14, 13, 0.06);
+}
+
+.f-err {
+  border-color: var(--accent) !important;
+}
+
+.f-err-msg {
+  color: var(--accent);
+  font-size: 0.76rem;
+  margin-top: 0.3rem;
+}
