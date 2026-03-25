@@ -3,92 +3,77 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
-import { ObjResult, SignUpForm } from "../../types";
+import { ObjResult, LoginForm } from "../../types";
 import { FormErrors } from "@/types/Fields";
-import { signUpSchema } from "../../schema";
-import { signupUser } from "../services/signupService";
-import axios from "axios";
+import { loginSchema } from "../../schema";
+import { loginUser } from "../services/loginService";
 
 // ── Constants ─────────────────────────────────────────
-const EMPTY_SIGNUP: SignUpForm = {
-  userName: "",
+const EMPTY_LOGIN: LoginForm = {
   email: "",
-  phoneNumber: "",
   password: "",
-  confirmPassword: "",
 };
 
 // ── Hook ──────────────────────────────────────────────
-export function useSignup() {
-  const [form, setForm] = useState<SignUpForm>(EMPTY_SIGNUP);
-  const [errors, setErrors] = useState<FormErrors<SignUpForm>>({});
+export function useLogin() {
+  const [form, setForm] = useState<LoginForm>(EMPTY_LOGIN);
+  const [errors, setErrors] = useState<FormErrors<LoginForm>>({});
   const [success, setSuccess] = useState(false);
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
   const [apiError, setApiError] = useState<string | null>(null);
   const router = useRouter();
 
   const handleChange = (
-    name: keyof SignUpForm & string,
+    name: keyof LoginForm & string,
     value: string
   ): void => {
     setForm((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async () => {
-    const res: ObjResult<SignUpForm> = signUpSchema.parse(form);
+    const res: ObjResult<LoginForm> = loginSchema.parse(form);
 
     if (res.errors !== undefined) {
       setErrors(res.errors);
       return;
     }
 
-    if (form.password !== form.confirmPassword) {
-      setErrors({ confirmPassword: "Passwords do not match" });
-      return;
-    }
-
     try {
       setErrors({});
-      setLoading(true)
-      const res = await signupUser(form);
-      setSuccess(true);
-      setApiError(null)
+      setLoading(true);
+      setApiError(null);
+      const response = await loginUser(form);
 
-      // Redirect to home page after successful signup
+      // Store token in localStorage
+      if (response?.data?.token) {
+        localStorage.setItem("token", response.data.token);
+      }
+
+      setSuccess(true);
+
+      // Redirect to home page after successful login
       setTimeout(() => {
         router.push("/home");
       }, 1000);
 
       return {
         success: true,
-        data: res,
+        data: response,
       };
     } catch (err: unknown) {
-   
-      if (axios.isAxiosError(err)) {
-        setApiError(err.response?.data?.message || err.message)
-        return {
-          success: false,
-          error: err.response?.data?.message || err.message,
-        };
+      if (typeof err === "string") {
+        setApiError(err);
+      } else {
+        setApiError("Something went wrong");
       }
-         setLoading(false)
-      setApiError("Something Went Wrong")
 
       return {
         success: false,
-        error: "Something went wrong",
+        error: typeof err === "string" ? err : "Something went wrong",
       };
     } finally {
-
       setLoading(false);
     }
-
-
-
-
-
-
   };
 
   return {
@@ -99,6 +84,6 @@ export function useSignup() {
     handleSubmit,
     router,
     loading,
-    apiError
+    apiError,
   };
 }
