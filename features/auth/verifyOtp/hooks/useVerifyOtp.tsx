@@ -87,11 +87,6 @@ export function useVerifyOtp() {
       setApiError(null);
       const response = await verifyOtp({ email, otp: form.otp });
 
-      // Store token from response
-      if (response?.data?.token) {
-        localStorage.setItem("token", response.data.token);
-      }
-
       // Clean up sessionStorage
       sessionStorage.removeItem("verifyEmail");
 

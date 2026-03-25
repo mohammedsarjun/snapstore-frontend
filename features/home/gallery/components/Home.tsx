@@ -6,6 +6,8 @@ import { Topbar } from "./Topbar";
 import { GalleryCard } from "./GalleryCard";
 import { AddImageModal } from "./AddImageModal";
 import { useGallery } from "../hooks/useGallery";
+import axiosInstance from "@/lib/axios";
+import { API_ROUTES } from "@/constants/apiRoutes";
 
 export const HomeContent: FC = (): ReactElement => {
   const [userName, setUserName] = useState<string>("User");
@@ -30,17 +32,18 @@ export const HomeContent: FC = (): ReactElement => {
   } = useGallery();
 
   useEffect(() => {
-    try {
-      const token = localStorage.getItem("token");
-      if (token) {
-        const payload = JSON.parse(atob(token.split(".")[1]));
-        if (payload.userName) {
-          setUserName(payload.userName);
+    const fetchUser = async () => {
+      try {
+        const response = await axiosInstance.get(API_ROUTES.AUTH.ME);
+        if (response.data?.data?.userName) {
+          setUserName(response.data.data.userName);
         }
+      } catch {
+        // Fallback or redirect if token is invalid
+        // router.push("/login") is already handled by middleware or interceptors
       }
-    } catch {
-      // Decode error, fallback to 'User'
-    }
+    };
+    fetchUser();
   }, []);
 
   const editItem = modal.kind === "edit" ? modal.item : null;

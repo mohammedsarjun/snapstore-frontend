@@ -9,6 +9,7 @@ export const API_ROUTES = {
     FORGOT_PASSWORD: '/auth/forgot-password',
     RESET_PASSWORD: '/auth/reset-password',
     LOGOUT: '/auth/logout',
+    ME: '/auth/me',
   },
   IMAGES: {
     BASE: '/images',
