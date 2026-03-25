@@ -9,5 +9,6 @@
   .su-error { background:#fde8e8; border:1px solid #f5c2c2; border-radius:var(--radius); color:#c92a2a; padding:.8rem 1rem; font-size:.88rem; margin-bottom:1rem; }
   .su-btn { width:100%; padding:.85rem; background:var(--ink); color:var(--cream); border:none; border-radius:var(--radius); font-family:var(--body); font-size:.95rem; font-weight:500; cursor:pointer; margin-top:.5rem; transition:background .2s; }
   .su-btn:hover { background:#2a2826; }
+  .su-btn:disabled { opacity:0.6; cursor:not-allowed; }
   .su-link { text-align:center; margin-top:1.2rem; font-size:.88rem; color:var(--muted); }
   .su-link button { background:none; border:none; cursor:pointer; color:var(--accent2); font-weight:500; font-size:.88rem; font-family:var(--body); text-decoration:underline; }

@@ -5,7 +5,10 @@
 .fp-title { font-family:var(--display); font-size:1.85rem; font-weight:700; margin-bottom:.3rem; letter-spacing:-.5px; }
 .fp-sub { font-size:.9rem; color:var(--muted); margin-bottom:1.8rem; font-weight:300; }
 .fp-ok { background:#edf7f1; border:1px solid #b6dfc7; border-radius:var(--radius); color:#2d7a4f; padding:.8rem 1rem; font-size:.88rem; margin-bottom:1rem; }
+.fp-error { background:#fde8e8; border:1px solid #f5c2c2; border-radius:var(--radius); color:#c92a2a; padding:.8rem 1rem; font-size:.88rem; margin-bottom:1rem; }
 .fp-btn { width:100%; padding:.85rem; background:var(--ink); color:var(--cream); border:none; border-radius:var(--radius); font-family:var(--body); font-size:.95rem; font-weight:500; cursor:pointer; margin-top:.5rem; transition:background .2s; }
 .fp-btn:hover { background:#2a2826; }
+.fp-btn:disabled { opacity:0.6; cursor:not-allowed; }
 .fp-link { text-align:center; margin-top:1.2rem; font-size:.88rem; color:var(--muted); }
 .fp-link button { background:none; border:none; cursor:pointer; color:var(--accent2); font-weight:500; font-size:.88rem; font-family:var(--body); text-decoration:underline; }
+

@@ -4,7 +4,9 @@ export const API_ROUTES = {
   AUTH: {
     LOGIN: '/auth/login',
     SIGNUP: '/auth/signup',
+    VERIFY_OTP: '/auth/verify-otp',
+    RESEND_OTP: '/auth/resend-otp',
     FORGOT_PASSWORD: '/auth/forgot-password',
-    OTP: '/auth/verify-otp',
+    RESET_PASSWORD: '/auth/reset-password',
   },
 };

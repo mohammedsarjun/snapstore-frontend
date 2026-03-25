@@ -3,32 +3,32 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
-import { ObjResult, LoginForm } from "../../types";
+import { ObjResult, ResetPasswordForm } from "../../types";
 import { FormErrors } from "@/types/Fields";
-import { loginSchema } from "../../schema";
-import { loginUser } from "../services/loginService";
+import { resetPasswordSchema } from "../../schema";
+import { resetPassword } from "../services/changePasswordService";
+import { toast } from "react-toastify";
 
 // ── Constants ─────────────────────────────────────────
-const EMPTY_LOGIN: LoginForm = {
-  email: "",
+const EMPTY_RESET: ResetPasswordForm = {
   password: "",
+  confirmPassword: "",
 };
 
 // ── Hook ──────────────────────────────────────────────
-export function useLogin() {
-  const [form, setForm] = useState<LoginForm>(EMPTY_LOGIN);
-  const [errors, setErrors] = useState<FormErrors<LoginForm>>({});
-  const [success, setSuccess] = useState(false);
+export function useChangePassword(token: string) {
+  const [form, setForm] = useState<ResetPasswordForm>(EMPTY_RESET);
+  const [errors, setErrors] = useState<FormErrors<ResetPasswordForm>>({});
   const [loading, setLoading] = useState(false);
   const [apiError, setApiError] = useState<string | null>(null);
   const router = useRouter();
 
   const handleChange = (
-    name: keyof LoginForm & string,
+    name: keyof ResetPasswordForm & string,
     value: string
   ): void => {
     setForm((prev) => ({ ...prev, [name]: value }));
-    // Clear field error when user types a new value
+    // Clear field error when user types
     setErrors((prev) => {
       if (prev[name]) {
         const updated = { ...prev };
@@ -37,15 +37,24 @@ export function useLogin() {
       }
       return prev;
     });
-    // Clear API error when user types
     if (apiError) setApiError(null);
   };
 
   const handleSubmit = async () => {
-    const res: ObjResult<LoginForm> = loginSchema.parse(form);
+    const res: ObjResult<ResetPasswordForm> = resetPasswordSchema.parse(form);
 
     if (res.errors !== undefined) {
       setErrors(res.errors);
+      return;
+    }
+
+    if (form.password !== form.confirmPassword) {
+      setErrors({ confirmPassword: "Passwords do not match" });
+      return;
+    }
+
+    if (!token) {
+      setApiError("Invalid reset link");
       return;
     }
 
@@ -53,40 +62,24 @@ export function useLogin() {
       setErrors({});
       setLoading(true);
       setApiError(null);
-      const response = await loginUser(form);
+      await resetPassword({
+        token,
+        password: form.password,
+        confirmPassword: form.confirmPassword,
+      });
 
-      // Store token in localStorage
-      if (response?.data?.token) {
-        localStorage.setItem("token", response.data.token);
-      }
+      toast.success("Password reset successfully!");
 
-      setSuccess(true);
-
-      // Redirect to home page after successful login
+      // Redirect to login page
       setTimeout(() => {
-        router.push("/home");
-      }, 1000);
+        router.push("/login");
+      }, 2000);
 
-      return {
-        success: true,
-        data: response,
-      };
+      return { success: true };
     } catch (err: unknown) {
       const errorMsg = typeof err === "string" ? err : "Something went wrong";
-
-      // If user is not verified, redirect to OTP page
-      if (errorMsg === "Please verify your email before logging in") {
-        sessionStorage.setItem("verifyEmail", form.email);
-        router.push("/verify-otp");
-        return;
-      }
-
       setApiError(errorMsg);
-
-      return {
-        success: false,
-        error: errorMsg,
-      };
+      return { success: false, error: errorMsg };
     } finally {
       setLoading(false);
     }
@@ -95,11 +88,10 @@ export function useLogin() {
   return {
     form,
     errors,
-    success,
+    loading,
+    apiError,
     handleChange,
     handleSubmit,
     router,
-    loading,
-    apiError,
   };
 }

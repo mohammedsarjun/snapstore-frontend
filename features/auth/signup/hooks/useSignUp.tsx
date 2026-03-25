@@ -7,7 +7,6 @@ import { ObjResult, SignUpForm } from "../../types";
 import { FormErrors } from "@/types/Fields";
 import { signUpSchema } from "../../schema";
 import { signupUser } from "../services/signupService";
-import axios from "axios";
 
 // ── Constants ─────────────────────────────────────────
 const EMPTY_SIGNUP: SignUpForm = {
@@ -32,6 +31,17 @@ export function useSignup() {
     value: string
   ): void => {
     setForm((prev) => ({ ...prev, [name]: value }));
+    // Clear field error when user types a new value
+    setErrors((prev) => {
+      if (prev[name]) {
+        const updated = { ...prev };
+        delete updated[name];
+        return updated;
+      }
+      return prev;
+    });
+    // Clear API error when user types
+    if (apiError) setApiError(null);
   };
 
   const handleSubmit = async () => {
@@ -54,9 +64,12 @@ export function useSignup() {
       setSuccess(true);
       setApiError(null)
 
-      // Redirect to home page after successful signup
+      // Store email in sessionStorage for OTP verification
+      sessionStorage.setItem("verifyEmail", form.email);
+
+      // Redirect to OTP verification page
       setTimeout(() => {
-        router.push("/home");
+        router.push("/verify-otp");
       }, 1000);
 
       return {
@@ -64,31 +77,18 @@ export function useSignup() {
         data: res,
       };
     } catch (err: unknown) {
-   
-      if (axios.isAxiosError(err)) {
-        setApiError(err.response?.data?.message || err.message)
-        return {
-          success: false,
-          error: err.response?.data?.message || err.message,
-        };
+      if (typeof err === "string") {
+        setApiError(err);
+      } else {
+        setApiError("Something went wrong");
       }
-         setLoading(false)
-      setApiError("Something Went Wrong")
-
       return {
         success: false,
-        error: "Something went wrong",
+        error: typeof err === "string" ? err : "Something went wrong",
       };
     } finally {
-
       setLoading(false);
     }
-
-
-
-
-
-
   };
 
   return {

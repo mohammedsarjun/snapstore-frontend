@@ -20,7 +20,7 @@ export default  (): ReactElement => {
             <div className={styles["su-title"]}>Create account</div>
             <div className={styles["su-sub"]}>Join Frame and start building your gallery</div>
             {apiError && <div className={styles["su-error"]}>{apiError}</div>}
-            {success && <div className={styles["su-ok"]}>✓ Account created! Redirecting…</div>}
+            {success && <div className={styles["su-ok"]}>✓ Account created! Check your email for OTP…</div>}
             <Field<SignUpForm> label="Username"         name="userName"        value={form.userName}        onChange={handleChange} errors={errors} placeholder="yourname" />
             <Field<SignUpForm> label="Email"            name="email"           type="email"    value={form.email}           onChange={handleChange} errors={errors} placeholder="you@example.com" />
             <Field<SignUpForm> label="Phone Number"     name="phoneNumber"     type="tel"      value={form.phoneNumber}     onChange={handleChange} errors={errors} placeholder="+91 9876543210" />
