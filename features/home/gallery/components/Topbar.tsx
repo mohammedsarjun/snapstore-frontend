@@ -17,7 +17,6 @@ export const Topbar: FC<TopbarProps> = ({ user }): ReactElement => {
   const handleLogout = async () => {
     try {
       await axiosInstance.post(API_ROUTES.AUTH.LOGOUT);
-      localStorage.removeItem("token");
       router.push("/login");
     } catch {
       toast.error("Logout failed");

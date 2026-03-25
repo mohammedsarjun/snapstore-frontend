@@ -11,3 +11,8 @@ export const loginUser = async (data: LoginForm) => {
 
   return res.data;
 };
+
+export const getMeUser = async () => {
+    const res = await axiosInstance.get(API_ROUTES.AUTH.ME);
+    return res.data;
+};

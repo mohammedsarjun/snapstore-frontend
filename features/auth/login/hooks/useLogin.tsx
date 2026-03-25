@@ -55,11 +55,6 @@ export function useLogin() {
       setApiError(null);
       const response = await loginUser(form);
 
-      // Store token in localStorage
-      if (response?.data?.token) {
-        localStorage.setItem("token", response.data.token);
-      }
-
       setSuccess(true);
 
       // Redirect to home page after successful login
