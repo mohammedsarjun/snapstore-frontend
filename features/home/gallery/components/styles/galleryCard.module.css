@@ -1,0 +1,18 @@
+.gcCard { background:var(--card); border-radius:6px; border:1.5px solid var(--warm); overflow:hidden; cursor:pointer; position:relative; transition:box-shadow .2s,transform .2s,border-color .2s; }
+.gcCard:hover { box-shadow:var(--shadow); transform:translateY(-2px); border-color:#ccc; }
+.gcCard.gcSel { border-color:var(--accent2); box-shadow:0 0 0 3px rgba(42,110,200,.15); }
+.gcCard.gcDrag { opacity:.5; transform:scale(.97); }
+.gcCard.gcOver { border-color:var(--accent); background:#fdf5f2; }
+.gcImg { width:100%; aspect-ratio:4/3; object-fit:cover; display:block; background:var(--warm); }
+.gcPh { width:100%; aspect-ratio:4/3; background:linear-gradient(135deg,var(--warm),#d4cdc0); display:flex; align-items:center; justify-content:center; font-size:2.4rem; }
+.gcBody { padding:.85rem 1rem; }
+.gcTtl { font-size:.94rem; font-weight:500; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; margin-bottom:.6rem; }
+.gcActs { display:flex; gap:.5rem; flex-wrap:wrap; }
+.gcBadge { position:absolute; top:8px; left:8px; width:22px; height:22px; border-radius:50%; background:var(--accent2); color:#fff; display:flex; align-items:center; justify-content:center; font-size:.7rem; font-weight:700; }
+.gcHnd { position:absolute; top:8px; right:8px; width:28px; height:28px; background:rgba(255,255,255,.85); border-radius:4px; display:flex; align-items:center; justify-content:center; font-size:1rem; color:var(--muted); cursor:grab; }
+.gcBtn { padding:.3rem .7rem; font-size:.74rem; border-radius:var(--radius); border:1px solid var(--warm); background:var(--cream); cursor:pointer; font-family:var(--body); font-weight:500; color:var(--ink); transition:all .15s; }
+.gcBtn:hover { background:var(--warm); }
+.gcBtnEdit { border-color:#b8d0f0; color:var(--accent2); }
+.gcBtnEdit:hover { background:#eef3fb; }
+.gcBtnDel { border-color:#f5c2b5; color:var(--accent); }
+.gcBtnDel:hover { background:#fdf0ec; }

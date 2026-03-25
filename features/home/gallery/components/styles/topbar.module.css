@@ -1,0 +1,7 @@
+.tbShell { background:var(--ink); padding:1rem 2rem; display:flex; justify-content:space-between; align-items:center; }
+.tbBrand { font-family:var(--display); font-size:1.3rem; font-weight:700; color:var(--cream); letter-spacing:-.5px; }
+.tbRight { display:flex; align-items:center; gap:1.5rem; }
+.tbUser { color:var(--muted); font-size:.88rem; }
+.tbUser strong { color:var(--cream); font-weight:500; font-family:var(--body); }
+.tbOut { background:none; border:none; color:var(--accent2); font-size:.88rem; font-weight:500; cursor:pointer; font-family:var(--body); transition:color .15s; }
+.tbOut:hover { color:#fff; }

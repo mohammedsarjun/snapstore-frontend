@@ -1,0 +1,28 @@
+@keyframes aimFade { from{opacity:0} to{opacity:1} }
+@keyframes aimUp { from{transform:translateY(20px);opacity:0} to{transform:translateY(0);opacity:1} }
+.aimOv { position:fixed; inset:0; background:rgba(15,14,13,.6); backdrop-filter:blur(4px); display:flex; align-items:flex-start; justify-content:center; z-index:200; padding:4rem 1rem 1rem; animation:aimFade .18s ease; overflow-y:auto; }
+.aimPn { background:var(--card); border-radius:8px; padding:2rem; width:100%; max-width:600px; box-shadow:0 20px 60px rgba(15,14,13,.25); animation:aimUp .2s ease; margin-bottom: 2rem;}
+.aimTtl { font-family:var(--display); font-size:1.4rem; font-weight:700; margin-bottom:1.4rem; }
+.aimZone { border:2px dashed var(--warm); border-radius:6px; padding:2rem; text-align:center; cursor:pointer; margin-bottom:1rem; background:var(--cream); transition:border-color .2s,background .2s; }
+.aimZone:hover, .aimZone.aimAct { border-color:var(--accent2); background:#f0f5fd; }
+.aimZone p { font-size:.87rem; color:var(--muted); margin-top:.4rem; }
+.aimZoneEmoji { font-size: 2rem; }
+
+.aimList { display: flex; flex-direction: column; gap: 1.5rem; margin-bottom: 1.5rem;}
+.aimItem { display: flex; gap: 1rem; border: 1px solid var(--warm); padding: 1rem; border-radius: var(--radius); align-items: flex-start;}
+.aimImgPreview { width: 100px; height: 100px; object-fit: cover; border-radius: 4px; border: 1px solid var(--warm); }
+.aimFields { flex: 1; display: flex; flex-direction: column; gap: 0.5rem; }
+
+.aimLbl { display:block; font-size:.75rem; font-weight:500; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); }
+.aimInp { width:100%; padding:.7rem .95rem; border:1.5px solid var(--warm); border-radius:var(--radius); font-family:var(--body); font-size:.95rem; background:var(--cream); color:var(--ink); outline:none; transition:border-color .2s; }
+.aimInp:focus { border-color:var(--ink); box-shadow:0 0 0 3px rgba(15,14,13,.06); }
+.aimInp.aimErr { border-color:var(--accent); }
+.aimFerr { color:var(--accent); font-size:.76rem; margin-top:.3rem; }
+.aimRmv { background:none; border:none; font-size:.82rem; color:var(--accent); cursor:pointer; font-family:var(--body); align-self: flex-start;}
+
+.aimRow { display:flex; gap:.8rem; margin-top:1.2rem; }
+.aimCan { flex:1; padding:.75rem; background:none; border:1.5px solid var(--warm); border-radius:var(--radius); font-family:var(--body); font-size:.9rem; cursor:pointer; color:var(--muted); transition:all .15s; }
+.aimCan:hover { background:var(--warm); color:var(--ink); }
+.aimCfm { flex:2; padding:.85rem; background:var(--ink); color:var(--cream); border:none; border-radius:var(--radius); font-family:var(--body); font-size:.95rem; font-weight:500; cursor:pointer; transition:background .2s; }
+.aimCfm:hover { background:#2a2826; }
+.aimCfm:disabled { opacity: 0.6; cursor: not-allowed;}
