@@ -153,8 +153,8 @@ export function useGallery() {
 
       if (fi === -1 || ti === -1) return prev;
 
-      const [moved] = arr.splice(fi, 1);
-      arr.splice(ti, 0, moved);
+      // Swap the elements
+      [arr[fi], arr[ti]] = [arr[ti], arr[fi]];
 
       newOrderIds = arr.map((img) => img.id);
       return arr;
