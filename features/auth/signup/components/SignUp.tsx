@@ -9,7 +9,9 @@ import { useSignup } from "../hooks/useSignUp";
  
 // ── Component ─────────────────────────────────────────────────────────────────
 export default  (): ReactElement => {
-  const { form, errors, success, handleChange, handleSubmit,router,loading,apiError } = useSignup();
+  const { form, errors, success, handleChange, handleSubmit,router,loading,apiError, isRedirecting } = useSignup();
+  
+  if (isRedirecting) return <></>;
  
   return (
     <>

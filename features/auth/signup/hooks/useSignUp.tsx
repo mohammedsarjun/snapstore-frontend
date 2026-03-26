@@ -24,7 +24,19 @@ export function useSignup() {
   const [success, setSuccess] = useState(false);
   const [loading, setLoading] = useState(false)
   const [apiError, setApiError] = useState<string | null>(null);
+  const [isRedirecting, setIsRedirecting] = useState(false);
   const router = useRouter();
+
+  // Redirect if already logged in
+  useState(() => {
+    if (typeof window !== "undefined") {
+      const token = localStorage.getItem("token");
+      if (token) {
+        setIsRedirecting(true);
+        router.replace("/home");
+      }
+    }
+  });
 
   const handleChange = (
     name: keyof SignUpForm & string,
@@ -99,6 +111,7 @@ export function useSignup() {
     handleSubmit,
     router,
     loading,
-    apiError
+    apiError,
+    isRedirecting,
   };
 }

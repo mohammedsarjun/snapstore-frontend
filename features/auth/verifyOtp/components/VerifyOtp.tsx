@@ -11,8 +11,10 @@ export const VerifyOtp = (): ReactElement => {
     const {
         form, errors, loading, apiError,
         timer, canResend, email, formatTime,
-        handleChange, handleSubmit, handleResend, router,
+        handleChange, handleSubmit, handleResend, router, isRedirecting
     } = useVerifyOtp();
+
+    if (isRedirecting) return <></>;
 
     return (
         <>

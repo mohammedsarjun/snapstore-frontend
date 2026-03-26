@@ -1,6 +1,7 @@
 "use client";
 
 import React, { FC, ReactElement, useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import styles from "./styles/home.module.css";
 import { Topbar } from "./Topbar";
 import { GalleryCard } from "./GalleryCard";
@@ -10,6 +11,7 @@ import axiosInstance from "@/lib/axios";
 import { API_ROUTES } from "@/constants/apiRoutes";
 
 export const HomeContent: FC = (): ReactElement => {
+  const router = useRouter();
   const [userName, setUserName] = useState<string>("User");
   const {
     images,
@@ -39,8 +41,7 @@ export const HomeContent: FC = (): ReactElement => {
           setUserName(response.data.data.userName);
         }
       } catch {
-        // Fallback or redirect if token is invalid
-        // router.push("/login") is already handled by middleware or interceptors
+        router.push("/login"); // Client-side redirect if not authenticated
       }
     };
     fetchUser();
