@@ -22,7 +22,19 @@ export function useVerifyOtp() {
   const [timer, setTimer] = useState(OTP_EXPIRY_SECONDS);
   const [canResend, setCanResend] = useState(false);
   const [email, setEmail] = useState<string>("");
+  const [isRedirecting, setIsRedirecting] = useState(false);
   const router = useRouter();
+
+  // Redirect if already logged in
+  useState(() => {
+    if (typeof window !== "undefined") {
+      const token = localStorage.getItem("token");
+      if (token) {
+        setIsRedirecting(true);
+        router.replace("/home");
+      }
+    }
+  });
 
   // Get email from sessionStorage
   useEffect(() => {
@@ -87,6 +99,11 @@ export function useVerifyOtp() {
       setApiError(null);
       const response = await verifyOtp({ email, otp: form.otp });
 
+      // Store token in localStorage
+      if (response.data?.token) {
+        localStorage.setItem("token", response.data.token);
+      }
+
       // Clean up sessionStorage
       sessionStorage.removeItem("verifyEmail");
 
@@ -139,5 +156,6 @@ export function useVerifyOtp() {
     handleSubmit,
     handleResend,
     router,
+    isRedirecting,
   };
 }

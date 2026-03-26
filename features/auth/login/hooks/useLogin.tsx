@@ -21,7 +21,19 @@ export function useLogin() {
   const [success, setSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
   const [apiError, setApiError] = useState<string | null>(null);
+  const [isRedirecting, setIsRedirecting] = useState(false);
   const router = useRouter();
+
+  // Redirect if already logged in
+  useState(() => {
+    if (typeof window !== "undefined") {
+      const token = localStorage.getItem("token");
+      if (token) {
+        setIsRedirecting(true);
+        router.replace("/home");
+      }
+    }
+  });
 
   const handleChange = (
     name: keyof LoginForm & string,
@@ -54,6 +66,11 @@ export function useLogin() {
       setLoading(true);
       setApiError(null);
       const response = await loginUser(form);
+
+      // Store token in localStorage
+      if (response.data?.token) {
+        localStorage.setItem("token", response.data.token);
+      }
 
       setSuccess(true);
 
@@ -96,5 +113,6 @@ export function useLogin() {
     router,
     loading,
     apiError,
+    isRedirecting,
   };
 }

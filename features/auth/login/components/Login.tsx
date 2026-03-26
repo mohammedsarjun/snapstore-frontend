@@ -10,7 +10,9 @@ import { LoginForm } from "@/features/auth/types";
 import { useLogin } from "../hooks/useLogin";
 
 export const Login = (): ReactElement => {
-    const { form, errors, success, handleChange, handleSubmit, router, loading, apiError } = useLogin();
+    const { form, errors, success, handleChange, handleSubmit, router, loading, apiError, isRedirecting } = useLogin();
+
+    if (isRedirecting) return <></>;
 
     return (
         <>
